@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cursed Company</title>
+    <style>
+
+        .left-logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ffeb3b;
+    object-fit: contain;
+}
+
+.right-logo {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #000000;
+    object-fit: contain;
+}
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a, #000000);
+            color: #ffeb3b;
+            /* yellow */
+            transition: background-color 1s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: relative;
+            background: #000000;
+            padding: 20px 20px 40px 20px;
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+            min-height: 140px;
+        }
+
+        header img {
+            width: 180px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #ffeb3b;
+            transition: transform 0.3s ease;
+        }
+
+        header img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 5px #ffeb3b;
+        }
+
+        header h2 {
+            margin: 0;
+            font-weight: normal;
+            font-size: 1.5rem;
+            color: #fdd835;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        nav {
+            background: #222;
+            padding: 15px 0;
+            box-shadow: inset 0 -3px 10px rgba(255, 235, 59, 0.3);
+        }
+
+        nav a {
+            color: #ffeb3b;
+            text-decoration: none;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 8px;
+            margin: 0 8px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #ffeb3b;
+            color: #121212;
+            box-shadow: 0 0 8px #ffeb3b;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 30px 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            color: #ffeb3b;
+        }
+
+        section {
+            background: #000000;
+            flex: 1;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(255, 235, 59, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(255, 235, 59, 0.4);
+        }
+
+        section h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 5px #ffeb3b;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        button#colorButton {
+            background: #ffeb3b;
+            border: none;
+            color: #121212;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            margin: 30px auto;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.6);
+            transition: background-color 0.4s ease, transform 0.3s ease;
+            display: block;
+            width: fit-content;
+        }
+
+        button#colorButton:hover {
+            background-color: #fdd835;
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 235, 59, 0.8);
+        }
+
+        footer {
+            background: #121212;
+            color: #ffeb3b;
+            padding: 25px 20px;
+            font-weight: 600;
+            font-size: 1.3rem;
+            box-shadow: inset 0 4px 15px rgba(255, 235, 59, 0.3);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px 10px;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header h2 {
+                font-size: 1.1rem;
+            }
+        }
+        .projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: #1a1a1a;
+    border: 1px solid #ffeb3b;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(255, 235, 59, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(255, 235, 59, 0.4);
+}
+
+.project-card h3 {
+    color: #fdd835;
+    margin-top: 0;
+}
+
+.project-card p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #f5f5f5;
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #121212;
+    background-color: #ffeb3b;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.project-card a:hover {
+    background-color: #fdd835;
+    box-shadow: 0 0 10px #ffeb3b;
+}
+
+.error-text {
+    color: #ff3d00;
+    font-size: 0.9rem;
+    text-align: left;
+    margin: -4px 0 8px 0;
+    display: none;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+    <img src="cursed-logo.png" alt="Cursed Company Logo" class="left-logo" />
+    <img src="Fire.jpg" alt="Right Logo" class="right-logo" />
+    <h1>Welcome To The Cursed Company</h1>
+    <h2>Their Suffering Starts Here</h2>
+</header>
+
+
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#curses">Curses</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <section class="black-section">
+    <div style="text-align: center;">
+        <img src="Mission.png" alt="Mission Icon" style="width: 60px; margin-bottom: 10px;">
+        <h2>Our Mission</h2>
+    </div>
+    <p>
+        We will provide technology solutions, cursing 
+        services, and business consulting to help 
+        companies grow and individuals find meaningful
+        work in a rapidly evolving digital landscape.
+    </p>
+</section>
+
+       <section>
+    <div style="text-align: center;">
+        <img src="Vision.png" alt="Vision Icon" style="width: 60px; margin-bottom: 10px;">
+        <h2>Our Vision</h2>
+    </div>
+    <p>
+        In 2035, we will expand our operations to new 
+        countries, revolutionize industries with 
+        cutting-edge AI technologies, and launch an 
+        innovative job-matching platform that connects 
+        talent with opportunity like never before.
+    </p>
+</section>
+
+    </div>
+
+    <div class="container" id="projects">
+        <section>
+            <h2>Featured Projects</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Project Alpha</h3>
+                    <p>A website that helps users track cursed energy using AI and shadow beasts.</p>
+                    <a href="project-alpha.html">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Project Beta</h3>
+                    <p>An app for summoning coworkers from the underworld via Bluetooth.</p>
+                    <a href="project-beta.html">View Project</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container" id="curses">
+    <section>
+        <h2>🔮 Order Our Curses</h2>
+        <p>Select from our collection of powerful curses for your supernatural needs.</p>
+
+        <div style="margin-top: 30px;">
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b;">
+                <h3 style="color: #fdd835; margin-top: 0;">👻 Kulam - $499</h3>
+                <p style="font-size: 1rem; color: #f5f5f5;">Traditional Filipino witchcraft involving spell casting and hexes. Delivery: 3-5 ritual nights.</p>
+                <label style="display: block; margin-top: 10px;">
+                    <input type="checkbox" class="curse-checkbox" value="Kulam" data-price="499" style="margin-right: 8px;">
+                    Add to Cart
+                </label>
+            </div>
+
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b;">
+                <h3 style="color: #fdd835; margin-top: 0;">🐛 Barang - $899</h3>
+                <p style="font-size: 1rem; color: #f5f5f5;">Advanced curse using insects to possess victims. Extremely dangerous. Delivery: 7-10 ritual nights.</p>
+                <label style="display: block; margin-top: 10px;">
+                    <input type="checkbox" class="curse-checkbox" value="Barang" data-price="899" style="margin-right: 8px;">
+                    Add to Cart
+                </label>
+            </div>
+
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b;">
+                <h3 style="color: #fdd835; margin-top: 0;">💀 Aswang Summoning - $1,299</h3>
+                <p style="font-size: 1rem; color: #f5f5f5;">Summon a shape-shifting creature for protection or revenge. Premium service. Delivery: 14 ritual nights.</p>
+                <label style="display: block; margin-top: 10px;">
+                    <input type="checkbox" class="curse-checkbox" value="Aswang" data-price="1299" style="margin-right: 8px;">
+                    Add to Cart
+                </label>
+            </div>
+
+            <div style="margin-top: 25px; background: #0a0a0a; padding: 20px; border-radius: 10px;">
+                <h3 style="color: #fdd835;">📝 Your Information</h3>
+                <input type="text" id="customerName" placeholder="Your Name" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; background: #1a1a1a; color: #ffeb3b; border: 1px solid #ffeb3b;">
+
+                <input type="email" id="customerEmail" placeholder="Your Gmail" pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; background: #1a1a1a; color: #ffeb3b; border: 1px solid #ffeb3b;">
+                <p id="emailError" class="error-text">⚠️ Please use a valid Gmail address (e.g. yourname@gmail.com)</p>
+
+                <textarea id="targetInfo" placeholder="Target Information (Optional)" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; background: #1a1a1a; color: #ffeb3b; border: 1px solid #ffeb3b; min-height: 80px;"></textarea>
+            </div>
+
+            <div id="orderSummary" style="margin-top: 20px; background: #0a0a0a; padding: 20px; border-radius: 10px; border: 2px solid #ff3d00;">
+                <h3 style="color: #ff3d00;">🛒 Order Summary</h3>
+                <p id="summaryText" style="font-size: 1.1rem;">No curses selected</p>
+                <p id="totalPrice" style="font-size: 1.5rem; font-weight: bold; color: #ffeb3b; margin-top: 10px;">Total: $0</p>
+            </div>
+
+            <button onclick="placeOrder()" style="width: 100%; margin-top: 20px; background: #ff3d00; color: #fff; font-size: 1.3rem; font-weight: bold; padding: 15px; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 61, 0, 0.5);">
+                🔥 Place Order
+            </button>
+        </div>
+    </section>
+</div>
+
+
+<div class="container" id="contact">
+    <section>
+        <h2>Contact Us</h2>
+        <p>Reach out to us for Curses, Collaborations, or Customer Complaints.</p>
+        <p>Email: <a href="mailto:mcaacosta@tip.edu.ph">mcaacosta@tip.edu.ph</a></p>
+        <p>Phone: 09090515030</p>
+    </section>
+</div>
+
+
+    <button id="colorButton">Change Background Color</button>
+
+    <footer>
+        &copy; 2025 The Cursed Company. All rights reserved.
+    </footer>
+
+    <script>
+        const button = document.getElementById('colorButton');
+        const body = document.body;
+        const colors = ['#000000', '#1a1a1a', '#2c2c2c', '#333333', '#0f0f0f'];
+        let currentColor = 0;
+
+        button.addEventListener('click', () => {
+            currentColor = (currentColor + 1) % colors.length;
+            body.style.background = colors[currentColor];
+        });
+
+        const checkboxes = document.querySelectorAll('.curse-checkbox');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateOrderSummary);
+        });
+
+        function updateOrderSummary() {
+            const selectedCurses = [];
+            let total = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedCurses.push(checkbox.value);
+                    total += parseInt(checkbox.getAttribute('data-price'));
+                }
+            });
+
+            const summaryText = document.getElementById('summaryText');
+            const totalPrice = document.getElementById('totalPrice');
+
+            if (selectedCurses.length === 0) {
+                summaryText.textContent = 'No curses selected';
+            } else {
+                summaryText.textContent = 'Selected: ' + selectedCurses.join(', ');
+            }
+
+            totalPrice.textContent = 'Total: $' + total;
+        }
+
+        function isGmailAddress(email) {
+            return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email.trim());
+        }
+
+        const emailInput = document.getElementById('customerEmail');
+        const emailError = document.getElementById('emailError');
+
+        emailInput.addEventListener('blur', () => {
+            if (emailInput.value && !isGmailAddress(emailInput.value)) {
+                emailError.style.display = 'block';
+            } else {
+                emailError.style.display = 'none';
+            }
+        });
+
+        function placeOrder() {
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const selectedCurses = [];
+            let total = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedCurses.push(checkbox.value);
+                    total += parseInt(checkbox.getAttribute('data-price'));
+                }
+            });
+
+            if (!name || !email) {
+                alert('⚠️ Please enter your name and email!');
+                return;
+            }
+
+            if (!isGmailAddress(email)) {
+                emailError.style.display = 'block';
+                alert('⚠️ Please use a valid Gmail address (e.g. yourname@gmail.com)');
+                return;
+            }
+
+            if (selectedCurses.length === 0) {
+                alert('⚠️ Please select at least one curse!');
+                return;
+            }
+
+            alert('🔮 Order Confirmed! 🔮\n\nCustomer: ' + name + '\nEmail: ' + email + '\nCurses: ' + selectedCurses.join(', ') + '\nTotal: $' + total + '\n\nYour curses will be delivered within the ritual timeframe. Check your email for dark confirmation.');
+
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerEmail').value = '';
+            document.getElementById('targetInfo').value = '';
+            emailError.style.display = 'none';
+            checkboxes.forEach(cb => cb.checked = false);
+            updateOrderSummary();
+        }
+    </script>
+</body>
+</html>

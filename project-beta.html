@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Beta - Underworld Summoning</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0000, #0a0a1a);
+            color: #ffeb3b;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.4);
+            margin-bottom: 30px;
+            border: 2px solid #8a2be2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px #8a2be2;
+            margin-bottom: 10px;
+            color: #da70d6;
+        }
+
+        .subtitle {
+            color: #ba55d3;
+            font-size: 1.2rem;
+        }
+
+        .summoning-circle {
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
+            position: relative;
+            border: 3px solid #8a2be2;
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.6);
+            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1), transparent);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .circle-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 2px solid #da70d6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .pentagram {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            opacity: 0.3;
+            animation: spin 15s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .bluetooth-panel {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #8a2be2;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .status-display {
+            text-align: center;
+            padding: 20px;
+            background: rgba(26, 0, 26, 0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ba55d3;
+        }
+
+        .status-text {
+            font-size: 1.3rem;
+            color: #da70d6;
+            margin: 10px 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #8a2be2, #da70d6);
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(138, 43, 226, 0.7);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .coworker-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .coworker-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #8a2be2;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .coworker-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+            border-color: #da70d6;
+        }
+
+        .coworker-avatar {
+            font-size: 3rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 50%;
+            border: 2px solid #8a2be2;
+        }
+
+        .coworker-info {
+            flex: 1;
+        }
+
+        .coworker-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #da70d6;
+            margin-bottom: 5px;
+        }
+
+        .coworker-role {
+            color: #ba55d3;
+            font-size: 0.95rem;
+        }
+
+        .coworker-status {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(138, 43, 226, 0.3);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .summoned {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .summoned .coworker-status {
+            background: rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #da70d6;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #8a2be2;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #8a2be2;
+            color: #fff;
+        }
+
+        .ritual-progress {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .ritual-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #8a2be2, #da70d6);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 PROJECT BETA 🔮</h1>
+            <p class="subtitle">Underworld Summoning Protocol via Bluetooth</p>
+        </header>
+
+        <div class="bluetooth-panel">
+            <div class="summoning-circle" id="summoningCircle">
+                <div class="pentagram">⛤</div>
+                <div class="circle-inner">
+                    <span id="circleEmoji">👻</span>
+                </div>
+            </div>
+
+            <div class="status-display">
+                <div class="status-text" id="statusText">
+                    🌙 Bluetooth Portal: INACTIVE
+                </div>
+                <div class="ritual-progress">
+                    <div class="ritual-bar" id="ritualBar"></div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button onclick="initializeBluetooth()" id="initBtn">
+                    📡 Initialize Bluetooth Portal
+                </button>
+                <button onclick="scanUnderworld()" id="scanBtn" disabled>
+                    🔍 Scan Underworld
+                </button>
+                <button onclick="summonAll()" id="summonBtn" disabled>
+                    ⚡ Summon All
+                </button>
+                <button onclick="banishAll()" id="banishBtn" disabled>
+                    🚫 Banish All
+                </button>
+            </div>
+        </div>
+
+        <div class="bluetooth-panel">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #da70d6;">
+                Available Coworkers
+            </h2>
+            <div class="coworker-list" id="coworkerList"></div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="home.html" class="back-link">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        const coworkers = [
+            { id: 1, name: "Morticia Graves", role: "Shadow Accountant", emoji: "💀", summoned: false },
+            { id: 2, name: "Viktor Shade", role: "Necromancer Developer", emoji: "🧙‍♂️", summoned: false },
+            { id: 3, name: "Lilith Dark", role: "Curse Designer", emoji: "🧛‍♀️", summoned: false },
+            { id: 4, name: "Raven Nightfall", role: "Spirit Marketing Lead", emoji: "🦇", summoned: false },
+            { id: 5, name: "Dracula Von Code", role: "Backend Warlock", emoji: "🧛", summoned: false },
+            { id: 6, name: "Salem Hex", role: "UX Witch", emoji: "🔮", summoned: false }
+        ];
+
+        let bluetoothActive = false;
+        let scanningInProgress = false;
+
+        function updateStatus(text, progress = 0) {
+            document.getElementById('statusText').textContent = text;
+            document.getElementById('ritualBar').style.width = progress + '%';
+        }
+
+        function initializeBluetooth() {
+            if (bluetoothActive) return;
+            
+            updateStatus('⚡ Opening portal to the underworld...', 0);
+            document.getElementById('initBtn').disabled = true;
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                updateStatus('⚡ Opening portal to the underworld...', progress);
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    bluetoothActive = true;
+                    updateStatus('✅ Bluetooth Portal: ACTIVE', 100);
+                    document.getElementById('scanBtn').disabled = false;
+                    document.getElementById('summonBtn').disabled = false;
+                    document.getElementById('banishBtn').disabled = false;
+                    document.getElementById('circleEmoji').textContent = '⚡';
+                }
+            }, 200);
+        }
+
+        function scanUnderworld() {
+            if (!bluetoothActive || scanningInProgress) return;
+            
+            scanningInProgress = true;
+            updateStatus('🔍 Scanning the underworld...', 0);
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 20;
+                updateStatus('🔍 Scanning the underworld...', progress);
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    scanningInProgress = false;
+                    updateStatus(`✅ Found ${coworkers.length} coworkers in the underworld`, 100);
+                    renderCoworkers();
+                }
+            }, 300);
+        }
+
+        function renderCoworkers() {
+            const list = document.getElementById('coworkerList');
+            list.innerHTML = '';
+            
+            coworkers.forEach(coworker => {
+                const card = document.createElement('div');
+                card.className = 'coworker-card' + (coworker.summoned ? ' summoned' : '');
+                card.onclick = () => toggleSummon(coworker.id);
+                
+                card.innerHTML = `
+                    <div class="coworker-avatar">${coworker.emoji}</div>
+                    <div class="coworker-info">
+                        <div class="coworker-name">${coworker.name}</div>
+                        <div class="coworker-role">${coworker.role}</div>
+                        <div class="coworker-status">
+                            ${coworker.summoned ? '✅ SUMMONED' : '⏳ In Underworld'}
+                        </div>
+                    </div>
+                `;
+                
+                list.appendChild(card);
+            });
+        }
+
+        function toggleSummon(id) {
+            if (!bluetoothActive) return;
+            
+            const coworker = coworkers.find(c => c.id === id);
+            if (coworker) {
+                coworker.summoned = !coworker.summoned;
+                renderCoworkers();
+                
+                if (coworker.summoned) {
+                    updateStatus(`⚡ ${coworker.name} has been summoned!`, 100);
+                } else {
+                    updateStatus(`🌙 ${coworker.name} returned to the underworld`, 100);
+                }
+            }
+        }
+
+        function summonAll() {
+            if (!bluetoothActive) return;
+            
+            coworkers.forEach(c => c.summoned = true);
+            renderCoworkers();
+            updateStatus('⚡ All coworkers summoned to the mortal realm!', 100);
+        }
+
+        function banishAll() {
+            if (!bluetoothActive) return;
+            
+            coworkers.forEach(c => c.summoned = false);
+            renderCoworkers();
+            updateStatus('🌙 All coworkers banished back to the underworld', 100);
+        }
+
+        renderCoworkers();
+    </script>
+</body>
+</html>
